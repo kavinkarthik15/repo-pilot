@@ -545,9 +545,10 @@ class TestDefaultRules:
     def test_default_rules_is_a_list(self) -> None:
         assert isinstance(DEFAULT_RULES, list)
 
-    def test_default_rules_starts_empty(self) -> None:
-        """Task 2.0 leaves DEFAULT_RULES empty; rules are added in 2.1 – 2.6."""
-        assert DEFAULT_RULES == []
+    def test_default_rules_is_non_empty_after_task_2_1(self) -> None:
+        """DEFAULT_RULES is populated as rule tasks are completed (2.1 onward)."""
+        # Task 2.1 added 5 documentation rules; the list must not be empty.
+        assert len(DEFAULT_RULES) >= 5
 
     def test_default_rules_importable(self) -> None:
         from repopilot.rules import DEFAULT_RULES as dr  # noqa: PLC0415

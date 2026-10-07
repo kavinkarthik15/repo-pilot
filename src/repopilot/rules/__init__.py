@@ -9,6 +9,20 @@ tests may pass a custom list for isolation.
 from __future__ import annotations
 
 from repopilot.rules.base import Rule
+from repopilot.rules.documentation import (
+    ContributingRule,
+    DocsDirectoryRule,
+    ReadmePresenceRule,
+    ReadmeSectionsRule,
+    ReadmeSizeRule,
+)
 
-# Populated in Tasks 2.1 – 2.6 as each rule module is implemented.
-DEFAULT_RULES: list[Rule] = []
+DEFAULT_RULES: list[Rule] = [
+    # Task 2.1 — Documentation rules (evaluation order: presence → size → sections → contributing → docs)
+    ReadmePresenceRule(),
+    ReadmeSizeRule(),
+    ReadmeSectionsRule(),
+    ContributingRule(),
+    DocsDirectoryRule(),
+    # Task 2.2 – 2.6 rules appended here as they are implemented.
+]
