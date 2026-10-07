@@ -16,13 +16,24 @@ from repopilot.rules.documentation import (
     ReadmeSectionsRule,
     ReadmeSizeRule,
 )
+from repopilot.rules.structure import (
+    ConfigFilesRule,
+    EmptyRepoRule,
+    SourceDirectoryRule,
+    TestDirectoryRule,
+)
 
 DEFAULT_RULES: list[Rule] = [
-    # Task 2.1 — Documentation rules (evaluation order: presence → size → sections → contributing → docs)
+    # Task 2.1 — Documentation rules
     ReadmePresenceRule(),
     ReadmeSizeRule(),
     ReadmeSectionsRule(),
     ContributingRule(),
     DocsDirectoryRule(),
-    # Task 2.2 – 2.6 rules appended here as they are implemented.
+    # Task 2.2 — Structure rules
+    EmptyRepoRule(),
+    SourceDirectoryRule(),
+    TestDirectoryRule(),
+    ConfigFilesRule(),
+    # Task 2.3 – 2.6 rules appended here as they are implemented.
 ]
