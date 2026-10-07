@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "repopilot"
+version = "0.1.0"
+description = "Deterministic, offline-first repository health analysis tool"
+requires-python = ">=3.13"
+readme = "README.md"
+license = { text = "MIT" }
+keywords = ["repository", "health", "analysis", "code-quality"]
+dependencies = [
+    "fastapi>=0.115.0,<1.0",
+    "uvicorn[standard]>=0.32.0,<1.0",
+    "pydantic>=2.9.0,<3.0",
+    "typer[all]>=0.13.0,<1.0",
+    "gitpython>=3.1.43,<4.0",
+]
+
+[project.scripts]
+repopilot = "repopilot.cli:app"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0,<9.0",
+    "pytest-asyncio>=0.24.0,<1.0",
+    "httpx>=0.27.0,<1.0",
+    "hypothesis>=6.115.0,<7.0",
+    "ruff>=0.7.0,<1.0",
+    "mypy>=1.13.0,<2.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/repopilot"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-v --tb=short"
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "C4", "PIE", "RET", "SIM", "TID"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+mypy_path = "src"
